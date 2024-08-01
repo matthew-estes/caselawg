@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Case 
 
 def home(request):
-    return HttpResponse('hello world')
+    return render(request, 'home.html')
 
 def about(request):
-    return HttpResponse("<h1>Caselawg</h1>")
+    return render(request, 'about.html')
