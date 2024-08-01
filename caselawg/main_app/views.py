@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Case
 
@@ -14,10 +13,3 @@ class CaseUpdate(UpdateView):
 class CaseDelete(DeleteView):
     model = Case
     success_url = '/cases/'
-
-def home(request):
-    return HttpResponse('hello world')
-
-def about(request):
-    return HttpResponse("<h1>Caselawg</h1>")
-
