@@ -1,8 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Case 
 
 def home(request):
-    return HttpResponse('hello world')
+    return render(request, 'home.html')
 
 def about(request):
-    return HttpResponse("<h1>Caselawg</h1>")
+    return render(request, 'about.html')
+
+def case_index(request):
+    cases = Case.objects.all() 
+    return render(request, 'cases/case_index.html', {'cases': cases})
+
+def case_detail(request, case_id):
+    case = Case.objects.get(id=case_id)
+    return render(request, "cases/case_detail.html", {'case': case})
