@@ -16,6 +16,14 @@ def case_detail(request, case_id):
     case = Case.objects.get(id=case_id)
     return render(request, "cases/case_detail.html", {'case': case})
 
+def task_index(request):
+    tasks = Task.objects.all() 
+    return render(request, 'tasks/task_index.html', {'tasks': tasks})
+
+def task_detail(request, task_id):
+    task = Task.objects.get(id=task_id)
+    return render(request, "tasks/task_detail.html", {'task': task})
+
 class CaseCreate(CreateView):
     model = Case
     fields = '__all__'
