@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class='page-header'>
+    <h1>Delete Case?</h1>
+</div>
+
+<h2>Deleting {{ case.name }} will permanently remove it from the database. Are you sure you want to delete {{ case.name }}?</h2>
+
+<form action='' method='post' class='form'>
+    {% csrf_token %}
+    <a href='{% url 'case-detail' case.id %}' class='button-secondary'>Cancel</a>
+    <button type='submit' class='button-danger'>Yes - Delete</button>
+</form>
+
+{% endblock %}

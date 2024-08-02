@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 CASESTATUS = (
     ('A', 'Open-Active'),
@@ -55,6 +56,10 @@ class Case(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("case-detail", kwargs={"pk": self.pk})
+    
 
 class Task(models.Model):
     task_name = models.CharField(max_length=20)
