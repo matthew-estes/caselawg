@@ -31,6 +31,9 @@
           <li><a href="{% url 'case-detail' case.id %}" class="case-button">{{ case.name }}</a></li>
           {% endfor %}
         </ul>
+        <div class="create-button-container">
+          <a href="{% url 'case-create' %}" class="create-button">+</a>
+      </div>
 
       </div>
 
