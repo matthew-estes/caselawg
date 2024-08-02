@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Case 
+from .models import Case, Task
 
 def home(request):
     return render(request, 'home.html')
@@ -28,3 +28,16 @@ class CaseUpdate(UpdateView):
 class CaseDelete(DeleteView):
     model = Case
     success_url = '/cases/'
+
+class TaskCreate(CreateView):
+    model = Task
+    fields = '__all__'
+    success_url = '/task/'
+
+class TaskUpdate(UpdateView):
+    model = Case
+    fields = ['attorney', 'description', 'case_status', 'case_stage']
+
+class TaskDelete(DeleteView):
+    model = Case
+    success_url = '/task/'
