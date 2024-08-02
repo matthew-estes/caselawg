@@ -26,6 +26,11 @@
     </header>
     <div class="container">
       <div class="sidebar">
+        <ul>
+          {% for case in cases %}
+          <li><a href="{% url 'case-detail' case.id %}" class="case-button">{{ case.name }}</a></li>
+          {% endfor %}
+        </ul>
 
       </div>
 
