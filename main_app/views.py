@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Case 
 
 def home(request):
@@ -20,6 +21,7 @@ from .models import Case
 class CaseCreate(CreateView):
     model = Case
     fields = '__all__'
+    success_url = '/cases/'
 
 class CaseUpdate(UpdateView):
     model = Case
