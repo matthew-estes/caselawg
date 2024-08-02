@@ -3,7 +3,11 @@ rel='stylesheet' href='{% static 'css/form.css' %}'/> {% endblock %} {% block
 content %}
 
 <div class="page-header">
+  {% if case %}
+  <h1>Edit {{ case.name }}</h1>
+  {% else %}
   <h1>Add Case</h1>
+  {% endif %}
 </div>
 
 <form action="" method="post" class="add-case-form-container">
