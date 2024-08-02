@@ -34,7 +34,15 @@
         <div class="create-button-container">
           <a href="{% url 'case-create' %}" class="create-button">+</a>
       </div>
-
+      <div class="content">
+        {% block content %}
+        {% endblock %}
+        {% if case %}
+        <div class="action-buttons-container">
+            <a href="{% url 'case-update' case.id %}" class="action-button edit-button">Edit</a>
+            <a href="{% url 'case-delete' case.id %}" class="action-button delete-button">Delete</a>
+        </div>
+        {% endif %}
       </div>
 
     </div>
