@@ -20,8 +20,8 @@ def task_index(request):
     tasks = Task.objects.all() 
     return render(request, 'tasks/task_index.html', {'tasks': tasks})
 
-def task_detail(request, task_id):
-    task = Task.objects.get(id=task_id)
+def task_detail(request, pk):
+    task = Task.objects.get(pk=pk)
     return render(request, "tasks/task_detail.html", {'task': task})
 
 class CaseCreate(CreateView):
