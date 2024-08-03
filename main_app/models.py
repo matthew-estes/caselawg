@@ -83,3 +83,6 @@ class Task(models.Model):
 
     def __str__(self):
         return self.task_name
+    
+    def get_absolute_url(self):
+        return reverse("task-detail", kwargs={"pk": self.pk})

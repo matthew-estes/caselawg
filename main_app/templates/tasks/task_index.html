@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CaseLawg Tasks Index</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href='{% static 'css/bootstrap.min.css' %}' rel='stylesheet'>
   </head>
 
@@ -46,7 +47,9 @@
                            <td>{{ task.date_closed }}</td>
                            <td>{{ task.estimated_time }}</td>
                            <td>{{ task.actual_time }}</td>
-                           <td>ACTIONS</td>
+                           <td>
+                                <button type='button' class='btn btn-success me-1' href='{% url 'task-detail' task.pk %}' data-bs-toggle='model' data-bs-target='#myModel {{task.pk}}'><i class="fa-regular fa-eye fa-14"></i></button>
+                           </td>
                           </tr>
                           {% endfor %}
                         </tbody>
