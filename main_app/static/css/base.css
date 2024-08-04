@@ -9,3 +9,9 @@ body {
     display: flex;
     height: 100vh;
 }
+
+.sidebar {
+   display: flex;
+   flex-direction: column;
+    
+}
