@@ -3,3 +3,8 @@ body {
     padding: 0;
     height: 100vh
 }
+
+.container {
+    display: flex;
+    height: 100vh;
+}
