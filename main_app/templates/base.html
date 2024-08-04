@@ -29,7 +29,7 @@
       <div class="sidebar">
         <ul>
           {% for case in cases %}
-          <li class="{% if case.status == 'A' %}status-active{% elif case.status == 'I' %}status-inactive{% elif case.status == 'C' %}status-closed{% endif %}">
+          <li class="{% if case.case_status == 'A' %}status-active{% elif case.case_status == 'I' %}status-inactive{% elif case.case_status == 'C' %}status-closed{% endif %}">
             <a href="{% url 'case-detail' case.id %}" class="case-button">{{ case.name }}</a>
           </li>
           {% endfor %}
