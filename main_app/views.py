@@ -14,7 +14,8 @@ def case_index(request):
 
 def case_detail(request, pk):
     case = Case.objects.get(pk=pk)
-    return render(request, "cases/case_detail.html", {'case': case})
+    cases = Case.objects.all() 
+    return render(request, "cases/case_detail.html", {'case': case, 'cases': cases})
 
 def task_index(request):
     tasks = Task.objects.all() 
