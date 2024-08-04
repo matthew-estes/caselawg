@@ -40,7 +40,7 @@ class CaseDelete(DeleteView):
 class TaskCreate(CreateView):
     model = Task
     fields = '__all__'
-    success_url = '/task/'
+    success_url = '/tasks/'
 
 class TaskUpdate(UpdateView):
     model = Case
