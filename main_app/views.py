@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views import View
 from .models import Case, Task
 
 
@@ -49,6 +50,12 @@ class CaseUpdate(UpdateView):
     fields = ["attorney", "description", "case_status", "case_stage"]
 
 
+class CaseCloseView(View):
+    def get(self, request, pk):
+        case = Case.objects.get(pk=pk)
+        case.case_status = "C"
+        case.save()
+        return redirect("case-detail", pk=pk)
 
 
 class CaseDelete(DeleteView):
