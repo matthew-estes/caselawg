@@ -20,3 +20,16 @@ body {
    background-color: #9cadc2;
 
 }
+
+.sidebar ul {
+    width: 100%;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar ul li {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
