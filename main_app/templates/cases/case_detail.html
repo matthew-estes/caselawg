@@ -16,5 +16,9 @@
       <p>Description: {{ case.description }}</p>
     </div>
   </div>
+  <div class="action-buttons-container">
+    <a href="{% url 'case-update' case.pk %}" class="action-button update-button">Update</a>
+    <a href="{% url 'case-close' case.pk %}" class="action-button close-button">Close</a>
+
 </div>
 {% endblock %}
