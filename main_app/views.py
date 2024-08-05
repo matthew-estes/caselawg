@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views import View
 from .models import Case, Task
+from django.contrib.auth.views import LoginView
 
 
-def home(request):
-    return render(request, "home.html")
+class Home(LoginView):
+    template_name = 'home.html'
 
 
 def about(request):
