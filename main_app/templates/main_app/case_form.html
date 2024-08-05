@@ -1,22 +1,14 @@
-{% extends 'base.html' %} {% load static %} {% block head %} <link
-rel='stylesheet' href='{% static 'css/form.css' %}'/> {% endblock %} 
+{% extends "base.html" %}
+
+{% block title %}Case Form{% endblock %}
 
 {% block content %}
-
-<div class="page-header">
-  {% if case %}
-  <h1>Edit {{ case.name }}</h1>
-  {% else %}
-  <h1>Add Case</h1>
-  {% endif %}
+<div class="case-form-wrapper content">
+  <h2>{{ form_title }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="submit-button">Save</button>
+  </form>
 </div>
-
-<form action="" method="post" class="add-case-form-container">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <button type="submit" class="button-submit">Add Case</button>
-</form>
-
 {% endblock %}

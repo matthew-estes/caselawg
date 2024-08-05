@@ -7,44 +7,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <title>CaseLawg</title>
     {% block head %} {% endblock %}
   </head>
   <body>
-    <header>
-      <div class="header-logo-container">
-        <a href="/">
-          <img src="" alt="CaseLawg Logo" />
-        </a>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="{% url 'case-create' %}">Add Case</a></li>
-          <li><a href="{% url 'task-create' %}">Add Task</a></li>
-          <li><a href="/about">About</a></li>
-        </ul>
-      </nav>
-    </header>
     <div class="container">
       <div class="sidebar">
         <ul>
           {% for case in cases %}
-          <li><a href="{% url 'case-detail' case.id %}" class="case-button">{{ case.name }}</a></li>
+          <li class="{% if case.case_status == 'A' %}status-active{% elif case.case_status == 'I' %}status-inactive{% elif case.case_status == 'C' %}status-closed{% endif %}">
+            <a href="{% url 'case-detail' case.id %}" class="base-button case-button">
+              <div class="status-strip"></div>
+              {{case.name}}
+            </a>
+          </li>
           {% endfor %}
         </ul>
         <div class="create-button-container">
-          <a href="{% url 'case-create' %}" class="create-button">+</a>
+          <a href="{% url 'case-create' %}" class="base-button create-button">+</a>
       </div>
+    </div>
       <div class="content">
-        {% block content %}
-        {% endblock %}
-        {% if case %}
-        <div class="action-buttons-container">
-            <a href="{% url 'case-update' case.id %}" class="action-button edit-button">Edit</a>
-            <a href="{% url 'case-delete' case.id %}" class="action-button delete-button">Delete</a>
-        </div>
-        {% endif %}
+        {% block content %}{% endblock %}
       </div>
     </div>
   </body>

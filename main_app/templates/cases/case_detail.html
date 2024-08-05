@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Case Detail - {{ case.name }}{% endblock %}
+{% block title %}Case Details{% endblock %}
 
 {% block content %}
-    <h1>Case Detail: {{ case.name }}</h1>
+<div class="case-details-wrapper content">
+  <h2>{{ case.name }}</h2>
+  <div class="case-details">
     <p>Client: {{ case.client }}</p>
-    <p>Attorney: {{ case.attorney }}</p>
+    <p>Description: {{ case.description }}</p>
     <p>Date Opened: {{ case.date_opened }}</p>
     <p>Date Closed: {{ case.date_closed }}</p>
-    <p>Description: {{ case.description }}</p>
-    <p>Case Status: {{ case.get_case_status_display }}</p>
     <p>Case Stage: {{ case.get_case_stage_display }}</p>
+    <p>Case Status: {{ case.get_case_status_display }}</p>
+  </div>
+  <div class="action-buttons-container">
+    <a href="{% url 'case-update' case.pk %}" class="action-button update-button">Update</a>
+    <a href="{% url 'case-close' case.pk %}" class="action-button close-button">Close</a>
+  </div>
+</div>
 {% endblock %}
