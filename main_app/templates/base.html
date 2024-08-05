@@ -20,7 +20,7 @@
           <li class="{% if case.case_status == 'A' %}status-active{% elif case.case_status == 'I' %}status-inactive{% elif case.case_status == 'C' %}status-closed{% endif %}">
             <a href="{% url 'case-detail' case.id %}" class="base-button case-button">
               <div class="status-strip"></div>
-              {{ case.name }}
+              {{case.name}}
             </a>
           </li>
           {% endfor %}
