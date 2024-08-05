@@ -48,6 +48,12 @@ class CaseCreate(CreateView):
 class CaseUpdate(UpdateView):
     model = Case
     fields = ["attorney", "description", "case_status", "case_stage"]
+    success_url = '/cases/'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cases'] = Case.objects.all() 
+        return context
 
 
 class CaseCloseView(View):

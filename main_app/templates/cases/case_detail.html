@@ -1,6 +1,10 @@
-{% extends "base.html" %} {% block title %}Case Details{% endblock %} {% block content %}
+{% extends "base.html" %}
+
+{% block title %}Case Details{% endblock %}
+
+{% block content %}
 <div class="case-details-wrapper content">
-  <h1>{{ case.name }}</h1>
+  <h2>{{ case.name }}</h2>
   <div class="case-details">
     <p>Client: {{ case.client }}</p>
     <p>Attorney: {{ case.attorney }}</p>

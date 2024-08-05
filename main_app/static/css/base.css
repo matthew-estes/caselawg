@@ -1,6 +1,6 @@
 :root {
   --bg-color: #0a192c;
-  --sidebar-width: 275px;
+  --sidebar-width: 200px;
   --sidebar-border: 2px solid #656565;
   --padding: 15px;
   --button-bg: rgb(78, 78, 78);
@@ -33,11 +33,11 @@ body {
 .sidebar {
   display: flex;
   flex-direction: column;
-  min-width: 200px;
-  width: var(--sidebar-width);
+  width: var(--sidebar-width); 
   border-right: var(--sidebar-border);
   padding: var(--padding);
   overflow-y: auto;
+  flex-shrink: 0; 
 }
 
 .content-wrapper {
@@ -49,7 +49,7 @@ body {
 .content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-grow: 1;
   margin: 20px;
@@ -57,7 +57,22 @@ body {
   border-radius: var(--border-radius);
   background-color: var(--white);
   max-height: 40vh;
-  overflow: auto;
+  overflow-y: auto;
+}
+
+.case-details-wrapper {
+  width: 90%;
+  margin: 0;
+}
+
+.case-details h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+.case-details p {
+  margin-bottom: -2px;
+ 
 }
 
 ul {
@@ -178,4 +193,20 @@ li:hover .case-button {
 
 .close-button:hover {
   background-color: var(--red-dark);
+}
+
+@media (max-width: 700px) {
+  .action-buttons-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .action-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .content {
+    max-height: 45vh;
+  }
 }
