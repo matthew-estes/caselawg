@@ -43,9 +43,9 @@ class TaskCreate(CreateView):
     success_url = '/tasks/'
 
 class TaskUpdate(UpdateView):
-    model = Case
-    fields = ['attorney', 'description', 'case_status', 'case_stage']
+    model = Task
+    fields = '__all__'
 
 class TaskDelete(DeleteView):
-    model = Case
+    model = Task
     success_url = '/task/'
