@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 CASESTATUS = (
     ('A', 'Open-Active'),
@@ -54,6 +55,8 @@ class Case(models.Model):
         default=CASESTAGE[0][0]
     )
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     class Meta: 
         ordering = ['case_status']
 
