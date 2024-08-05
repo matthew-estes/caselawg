@@ -54,11 +54,16 @@ class Case(models.Model):
         default=CASESTAGE[0][0]
     )
 
+    class Meta: 
+        ordering = ['case_status']
+
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
         return reverse("case-detail", kwargs={"pk": self.pk})
+    
+   
     
 
 class Task(models.Model):
@@ -81,5 +86,11 @@ class Task(models.Model):
     
     case = models.ForeignKey(Case, on_delete=models.CASCADE)
 
+    class Meta: 
+        ordering = ['task_status']
+
     def __str__(self):
         return self.task_name
+    
+    def get_absolute_url(self):
+        return reverse("task-detail", kwargs={"pk": self.pk})

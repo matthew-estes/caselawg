@@ -26,12 +26,12 @@ def case_detail(request, pk):
 def task_index(request):
     tasks = Task.objects.all()
     return render(request, "tasks/task_index.html", {"tasks": tasks})
+  
 
-
-def task_detail(request, task_id):
-    task = Task.objects.get(id=task_id)
+def task_detail(request, pk):
+    task = Task.objects.get(pk=pk)
     return render(request, "tasks/task_detail.html", {"task": task})
-
+  
 
 class CaseCreate(CreateView):
     model = Case
@@ -71,15 +71,16 @@ class CaseDelete(DeleteView):
 
 class TaskCreate(CreateView):
     model = Task
-    fields = "__all__"
-    success_url = "/task/"
-
+    fields = '__all__'
+    success_url = '/tasks/'
+    
 
 class TaskUpdate(UpdateView):
-    model = Case
-    fields = ["attorney", "description", "case_status", "case_stage"]
-
+    model = Task
+    fields = '__all__'
+    
 
 class TaskDelete(DeleteView):
-    model = Case
-    success_url = "/task/"
+    model = Task
+    success_url = '/task/'
+
