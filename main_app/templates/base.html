@@ -13,6 +13,26 @@
     {% block head %} {% endblock %}
   </head>
   <body>
+    <nav>
+      <ul>
+        {% if user.is_authenticated %}
+          <li><a href='{% url 'case-index' %}'>My Cases</a></li>
+          <li><a href='{% url 'case-create' %}'>Add Case</a></li>
+          <li><a href='{% url 'task-create' %}'>Add Task</a></li>
+          <li><a href='{% url 'about' %}'>About</a></li>
+          <li>
+            <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+              {% csrf_token %}
+              <button type="submit">Log out</button>
+            </form>
+          </li>
+        {% else %}
+          <li><a href='{% url 'about' %}'>About</a></li>
+          <li><a href='{% url 'home' %}'>Login</a></li>
+          <li><a href="{% url 'signup' %}">Create Account</a></li>
+        {% endif %}
+      </ul>
+    </nav>
     <div class="container">
       <div class="sidebar">
         <ul>
