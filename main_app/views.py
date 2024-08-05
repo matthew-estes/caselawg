@@ -5,6 +5,8 @@ from .models import Case, Task
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class Home(LoginView):
@@ -29,29 +31,29 @@ def signup(request):
 def about(request):
     return render(request, "about.html")
 
-
+@login_required
 def case_index(request):
-    cases = Case.objects.all()
+    cases = Case.objects.filter(user=request.user)
     return render(request, "cases/case_index.html", {"cases": cases})
 
-
+@login_required
 def case_detail(request, pk):
     case = Case.objects.get(pk=pk)
     cases = Case.objects.all()
     return render(request, "cases/case_detail.html", {"case": case, "cases": cases})
 
-
+@login_required
 def task_index(request):
     tasks = Task.objects.all()
     return render(request, "tasks/task_index.html", {"tasks": tasks})
   
-
+@login_required
 def task_detail(request, pk):
     task = Task.objects.get(pk=pk)
     return render(request, "tasks/task_detail.html", {"task": task})
   
 
-class CaseCreate(CreateView):
+class CaseCreate(LoginRequiredMixin, CreateView):
     model = Case
     fields = "__all__"
     success_url = "/cases/"
@@ -67,7 +69,7 @@ class CaseCreate(CreateView):
         return context
 
 
-class CaseUpdate(UpdateView):
+class CaseUpdate(LoginRequiredMixin, UpdateView):
     model = Case
     fields = ["attorney", "description", "case_status", "case_stage"]
     success_url = '/cases/'
@@ -86,23 +88,23 @@ class CaseCloseView(View):
         return redirect("case-detail", pk=pk)
 
 
-class CaseDelete(DeleteView):
+class CaseDelete(LoginRequiredMixin, DeleteView):
     model = Case
     success_url = "/cases/"
 
 
-class TaskCreate(CreateView):
+class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     fields = '__all__'
     success_url = '/tasks/'
     
 
-class TaskUpdate(UpdateView):
+class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = '__all__'
     
 
-class TaskDelete(DeleteView):
+class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = '/task/'
 
