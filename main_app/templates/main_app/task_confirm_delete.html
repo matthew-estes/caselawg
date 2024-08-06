@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class='page-header'>
+    <h1>Delete Task?</h1>
+</div>
+
+<h2>Deleting {{ task.task_name }} will permanently remove it from the database. Are you sure you want to delete {{ task.task_name }}?</h2>
+
+<form action='' method='post' class='form'>
+    {% csrf_token %}
+    <a href='{% url 'task-detail' task.id %}' class='button-secondary'>Cancel</a>
+    <button type='submit' class='button-danger delete-button'>Yes - Delete</button>
+</form>
+
+{% endblock %}
