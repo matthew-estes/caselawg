@@ -4,7 +4,6 @@
 
 {% block content %}
 <div class="form-container">
-  <h2>{{ form_title }}</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

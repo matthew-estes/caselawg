@@ -117,9 +117,22 @@ body {
   padding: 20px;
   border-radius: var(--border-radius);
   background-color: var(--white);
-  max-height: 40vh;
+  max-height: auto;
   overflow-y: auto;
 }
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the start for better layout */
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  background-color: var(--white);
+
+}
+
 
 
 
