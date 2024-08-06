@@ -40,8 +40,9 @@ def case_index(request):
 @login_required
 def case_detail(request, pk):
     case = Case.objects.get(pk=pk)
-    cases = Case.objects.all()
-    return render(request, "cases/case_detail.html", {"case": case, "cases": cases})
+    tasks = Task.objects.filter(case=case)
+    cases = Case.objects.filter(user=request.user) 
+    return render(request, "cases/case_detail.html", {"case": case, "cases": cases, "tasks": tasks})
 
 @login_required
 def task_index(request):

@@ -1,8 +1,29 @@
-{% extends 'base.html' %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+  <title>Document</title>
+</head>
+<body>
+  <nav class="main-nav">
+    <ul class="main-nav-list">
+      {% if user.is_authenticated %}
+        <li class="main-nav-item"><a href='{% url 'case-index' %}' class="main-nav-link">MY CASES</a></li>
+        <li class="main-nav-item"><a href='{% url 'case-create' %}' class="main-nav-link">ADD CASE</a></li>
+        <li class="main-nav-item"><a href='{% url 'task-create' %}' class="main-nav-link">ADD TASK</a></li>
+        <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
+        <li class="main-nav-item">
+          
+      {% else %}
+        <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
+        <li class="main-nav-item"><a href='{% url 'home' %}' class="main-nav-link">LOGIN</a></li>
+        <li class="main-nav-item"><a href='{% url 'signup' %}' class="main-nav-link">CREATE ACCOUNT</a></li>
+      {% endif %}
+    </ul>
+  </nav>
 <h1>Welcome to CaseLawg</h1>
 {% if not user.is_authenticated %}
 <section>
@@ -15,4 +36,7 @@
   </section>
   {% endif %}
 
-{% endblock %}
+
+  
+</body>
+</html>
