@@ -3,12 +3,11 @@
 {% block title %}Case Form{% endblock %}
 
 {% block content %}
-<div class="case-form-wrapper content">
-  <h2>{{ form_title }}</h2>
+<div class="form-container">
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="submit-button">Save</button>
+    <button type="submit" class="submit-button">SAVE</button>
   </form>
 </div>
 {% endblock %}

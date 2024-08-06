@@ -6,16 +6,15 @@
 <div class="case-details-wrapper content">
   <h2>{{ case.name }}</h2>
   <div class="case-details">
-    <p>Client: {{ case.client }}</p>
-    <p>Description: {{ case.description }}</p>
-    <p>Date Opened: {{ case.date_opened }}</p>
-    <p>Date Closed: {{ case.date_closed }}</p>
-    <p>Case Stage: {{ case.get_case_stage_display }}</p>
-    <p>Case Status: {{ case.get_case_status_display }}</p>
+    <p><strong>Client:</strong> {{ case.client }}</p>
+    <p><strong>Description:</strong> {{ case.description }}</p>
+    <p><strong>Date Opened:</strong> {{ case.date_opened }}</p>
+    <p><strong>Date Closed:</strong> {{ case.date_closed }}</p>
+    <p><strong>Case Stage:</strong> {{ case.get_case_stage_display }}</p>
+    <p><strong>Case Status:</strong> {{ case.get_case_status_display }}</p>
   </div>
   <div class="action-buttons-container">
-    <a href="{% url 'case-update' case.pk %}" class="action-button update-button">Update</a>
-    <a href="{% url 'case-close' case.pk %}" class="action-button close-button">Close</a>
+    <a href="{% url 'case-update' case.pk %}" class="action-button update-button">UPDATE</a>
+    <a href="{% url 'case-close' case.pk %}" class="action-button close-button">CLOSE</a>
   </div>
-</div>
 {% endblock %}

@@ -7,34 +7,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-    <title>CaseLawg</title>
+    <title>CASELAWG</title>
     {% block head %} {% endblock %}
   </head>
   <body>
-    <nav>
-      <ul>
+    <nav class="main-nav">
+      <ul class="main-nav-list">
         {% if user.is_authenticated %}
-          <li><a href='{% url 'case-index' %}'>My Cases</a></li>
-          <li><a href='{% url 'case-create' %}'>Add Case</a></li>
-          <li><a href='{% url 'task-create' %}'>Add Task</a></li>
-          <li><a href='{% url 'about' %}'>About</a></li>
-          <li>
-            <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
-              {% csrf_token %}
-              <button type="submit">Log out</button>
-            </form>
-          </li>
+          <li class="main-nav-item"><a href='{% url 'case-index' %}' class="main-nav-link">MY CASES</a></li>
+          <li class="main-nav-item"><a href='{% url 'case-create' %}' class="main-nav-link">ADD CASE</a></li>
+          <li class="main-nav-item"><a href='{% url 'task-create' %}' class="main-nav-link">ADD TASK</a></li>
+          <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
+          <li class="main-nav-item">
+            
         {% else %}
-          <li><a href='{% url 'about' %}'>About</a></li>
-          <li><a href='{% url 'home' %}'>Login</a></li>
-          <li><a href="{% url 'signup' %}">Create Account</a></li>
+          <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
+          <li class="main-nav-item"><a href='{% url 'home' %}' class="main-nav-link">LOGIN</a></li>
+          <li class="main-nav-item"><a href="{% url 'signup' %}' class="main-nav-link">CREATE ACCOUNT</a></li>
         {% endif %}
       </ul>
     </nav>
     <div class="container">
-      <div class="sidebar">
+      <nav class="sidebar">
+
         <ul>
           {% for case in cases %}
           <li class="{% if case.case_status == 'A' %}status-active{% elif case.case_status == 'I' %}status-inactive{% elif case.case_status == 'C' %}status-closed{% endif %}">
@@ -46,12 +42,20 @@
           {% endfor %}
         </ul>
         <div class="create-button-container">
-          <a href="{% url 'case-create' %}" class="base-button create-button">+</a>
-      </div>
-    </div>
-      <div class="content">
+          <a href="{% url 'case-create' %}" class="base-button create-button" aria-label="Create New Case">+</a>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="logout-button-container">
+          <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="base-button logout-button">LOG OUT</button>
+          </form>
+        </div>
+        {% endif %}
+      </nav>
+      <main class="content">
         {% block content %}{% endblock %}
-      </div>
+      </main>
     </div>
   </body>
 </html>
