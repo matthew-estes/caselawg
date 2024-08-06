@@ -5,6 +5,7 @@ from .models import Case, Task
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -46,12 +47,27 @@ def case_detail(request, pk):
 def task_index(request):
     tasks = Task.objects.all()
     return render(request, "tasks/task_index.html", {"tasks": tasks})
+
+
+@login_required
+def task_index2(request):
+    tasks = Task.objects.all()
+    return render(request, "tasks/task_index2.html", {"tasks": tasks})
   
 @login_required
 def task_detail(request, pk):
     task = Task.objects.get(pk=pk)
     return render(request, "tasks/task_detail.html", {"task": task})
   
+
+def tasksDataAPI(request):
+    data = Task.objects.all()
+    dataList = []
+
+    for i in data:
+        dataList.append({'task_name':i.task_name, 'task_type':i.task_type, 'task_status':i.task_status, 'task_description':i.task_description, 'estimated_time':i.estimated_time, 'actual_time':i.actual_time, 'id':i.task_id})
+
+        return JsonResponse(dataList, safe=False)
 
 class CaseCreate(LoginRequiredMixin, CreateView):
     model = Case

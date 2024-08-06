@@ -1,0 +1,245 @@
+{% load static %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CaseLawg Tasks Index</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link href='{% static 'css/bootstrap.min.css' %}' rel='stylesheet'>
+  </head>
+
+  <body>
+    <h1>{{ case.name }} Case 1 Tasks</h1>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <button class='btn btn-blue mb-3' class="form-wrapper hidden" id='task-create'><i class="fa-regular fa-square-plus fa-lg me-1"></i>Add Task</button>
+          {% if tasks %} 
+          <div class="card border-info ms-4 me-4 mb-4">
+            <div class="card-header">{{ case.name }} Case 1 Tasks</div>
+            <div class="card-body">
+              <p class="card-text">
+                <div class='table-responsive'>
+                    <table class="table table-hover" id="tasksTable">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Estimated Time</th>
+                            <th scope="col">Actual Time</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody id='myTasks'>
+                            {% comment %} {% for task in tasks %} {% endcomment %}
+                          {% comment %} <tr>
+                           <td>{{ task.task_name }}</td>
+                           <td>{{ task.task_type }}</td>
+                           <td>{{ task.task_status }}</td>
+                           <td>{{ task.task_description }}</td>
+                           <td>{{ task.date_created }}</td>
+                           <td>{{ task.date_closed }}</td>
+                           <td>{{ task.estimated_time }}</td>
+                           <td>{{ task.actual_time }}</td>
+                           <td>
+                                <a class='btn btn-primary me-1' href='{% url 'task-detail' task.pk %}'><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                <a class='btn btn-warning me-1' href='{% url 'task-update' task.pk %}'><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a class='btn btn-success me-1' href='{% url 'task-close' task.pk %}'><i class="fa-regular fa-square-check"></i></a>
+                                <a type='button' class='btn btn-danger me-1' href='{% url 'task-delete' task.pk %}'><i class="fa-regular fa-trash-can"></i></a>
+                           </td>
+                          </tr>
+                          {% endfor %} {% endcomment %}
+                        </tbody>
+                      </table>
+                </div>
+              </p>
+            </div>
+          </div>
+          {% else %} 
+            <h4 class='alert alert-primary ms-4 me-4 mb-4'>{{ case.name }} Case 1 has no tasks!</h4>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+    <script>
+
+        let taskId = 1
+        let newTask = {'task_name':null, 'id':`task-${taskId}`, 'task_type':null, 'task_status':null, 'task_description':null, 'estimated_time':null, 'actual_time':null}
+
+        $('#add-task').on('click', function(){
+            $('.form-wrapper').removeClass('hidden')
+        })
+
+        $('#task-create').on('click', function(){
+            addTaskRow(newTask)
+            createTaskPOST()
+            $('task.task_name').val('')
+            $('task.task_type').val('')
+            $('task.task_status').val('')
+            $('task.task_description').val('')
+            $('task.estimated_time').val('')
+            $('task.actual_time').val('')
+        })
+
+        function createTaskPOST(data){
+            const url = 'task/create/'
+
+            $.ajax({
+                method: 'POST',
+                url:url,
+                data:newTask,
+                success:function(){
+
+                }
+            })
+        }
+
+        function udpateTaskPOST(data){
+            const url = '/task/<int:pk>/update/'
+
+            $.ajax({
+                method: 'POST',
+                url:url,
+                data:data,
+                success:function(){
+                    
+                }
+            })
+        }
+
+        function deleteTaskPOST(data){
+            const url = '/task/<int:pk>/delete/'
+
+            $.ajax({
+                method: 'POST',
+                url:url,
+                data:data,
+                success:function(){
+                    
+                }
+            })
+        }
+
+        let tasks = []
+        const dataURL = '/tasksapi/'
+        $.ajax({
+            method:'GET',
+            url:dataURL,
+            success:function(response){
+                tasks = response
+                for (const i of tasks){
+                    addTaskRow(tasks[i])
+                }
+            }
+        })
+
+
+        function addTaskRow(task){
+            const row = `<tr scope="row" class="task-row-${task.id}">
+                            <td>${task.task_name}</td>
+                            <td>${task.task_type}</td>
+                            <td>${task.task_status}</td>
+                            <td>${task.task_description}</td>
+                            <td>${task.estimated_time}</td>
+                            <td>${task.actual_time}</td>
+                            <td>
+                                <button class='btn btn-warning me-1' disabled data-taskid="${task.id}" id="save-${task.id}"><i class="fa-regular fa-floppy-disk"></i></button>
+                                <button class='btn btn-danger me-1' data-taskid=${task.id} id="delete-${task.id}"><i class="fa-regular fa-trash-can"></i></button>
+                                <button class='btn btn-success me-1'><i class="fa-regular fa-square-check"></i></button>
+                                <button class='btn btn-primary me-1'><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+
+                                {% comment %} <button class='btn btn-primary me-1' href='{% url 'task-detail' task.pk %}'><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                                <button class='btn btn-warning me-1' href='{% url 'task-update' task.pk %}'><i class="fa-regular fa-pen-to-square"></i></button>
+                                <button class='btn btn-success me-1' href='{% url 'task-close' task.pk %}'><i class="fa-regular fa-square-check"></i></button>
+                                <button class='btn btn-danger me-1' href='{% url 'task-delete' task.pk %}'><i class="fa-regular fa-trash-can"></i></button> {% endcomment %}
+                           </td>
+                        </tr>`
+            $('#tasksTable').append(row)
+            $(`#delete-${task.id}`).on('click', deleteTask)
+            $(`#save-${task.id}`).on('click', saveTaskUpdate)
+            $(`#taskType-${task.id}`).on('click', editTaskType)
+            $(`#taskDescription-${task.id}`).on('click', editTaskDescription)
+            $(`#taskActualTime-${task.id}`).on('click', editTaskActualTime)
+        }
+
+
+        function editTaskType(){
+            const taskid = $(this).data('taskid')
+            const value = $(this).html()
+
+            $(this).unbind()
+            $(this).html(`<input class="task-type form-control" data-taskid=${taskid} id="task-${taskid}" type="text" value="${value}">`)
+
+            $(`task.task_type`).on('keyup', function(){
+                const taskid = $(this).data('taskid')
+                const saveButton = $(`#save-${taskid}`)
+                saveButton.prop('disabled', false)
+            })
+        }
+
+        function editTaskDescription(){
+            const taskid = $(this).data('taskid')
+            const value = $(this).html()
+
+            $(this).unbind()
+            $(this).html(`<input class="task-description form-control" data-taskid=${taskid} id="task-${taskid}" type="text" value="${value}">`)
+
+            $(`task.task_description`).on('keyup', function(){
+                const taskid = $(this).data('taskid')
+                const saveButton = $(`#save-${taskid}`)
+                saveButton.prop('disabled', false)
+            })
+        }
+
+        function editTaskActualTime(){
+            const taskid = $(this).data('taskid')
+            const value = $(this).html()
+
+            $(this).unbind()
+            $(this).html(`<input class="task-actual-time form-control" data-taskid=${taskid} id="task-${taskid}" type="text" value="${value}">`)
+
+            $(`task.actual_time`).on('keyup', function(){
+                const taskid = $(this).data('taskid')
+                const saveButton = $(`#save-${taskid}`)
+                saveButton.prop('disabled', false)
+            })
+        }
+
+        function saveTaskUpdate(){
+            const taskid = $(this).data('taskid')
+            const saveButton = $(`#save-${taskid}`)
+            const row = $(`.task-row-${taskid}`)
+
+            saveButton.prop('disabled', true)
+            row.css('opacity', "0.5")
+
+            const result = $(`#task-${taskid}`).val()
+            const data = {'id':taskid, 'task_type':task_type, 'task_description':task_description, 'actual_time':actual_time}
+            updateTaskPOST(data)
+
+            setTimeout(function(){
+                row.css('opacity', '1')
+            }, 2000)
+        }
+
+        function deleteTask(){
+            const taskid = $(this).data('taskid')
+            const deleteButton = $(`#delete-${taskid}`)
+            const saveButton = $(`#save-${taskid}`)
+
+            deleteButton.addClass('hidden')
+            saveButton.addClass('hidden')
+        }
+
+    </script>
+  </body>
+</html>

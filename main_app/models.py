@@ -86,6 +86,7 @@ class Task(models.Model):
     date_closed = models.DateField()
     estimated_time = models.IntegerField()
     actual_time = models.IntegerField()
+    task_id = models.ForeignKey
     
     case = models.ForeignKey(Case, on_delete=models.CASCADE)
 
