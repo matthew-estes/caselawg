@@ -172,6 +172,7 @@ li:hover .case-button {
   white-space: normal;
   overflow: visible;
   background-color: var(--button-hover-bg);
+  transform: scale(1.05);
 }
 
 .status-strip {
@@ -225,6 +226,26 @@ li:hover .case-button {
   color: var(--white);
   transform: scale(1.1);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  
+}
+
+form button.submit-button {
+  text-decoration: none;
+  color: var(--white);
+  background-color: var(--blue);
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: var(--button-box-shadow);
+}
+
+form button.submit-button:hover {
+  background-color: #6396b8;
+  transform: scale(1.05);
 }
 
 .logout-button-container {
