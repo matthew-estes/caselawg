@@ -5,6 +5,7 @@ from .models import Case, Task
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -46,12 +47,27 @@ def case_detail(request, pk):
 def task_index(request):
     tasks = Task.objects.all()
     return render(request, "tasks/task_index.html", {"tasks": tasks})
+
+
+@login_required
+def task_index2(request):
+    tasks = Task.objects.all()
+    return render(request, "tasks/task_index2.html", {"tasks": tasks})
   
 @login_required
 def task_detail(request, pk):
     task = Task.objects.get(pk=pk)
     return render(request, "tasks/task_detail.html", {"task": task})
   
+
+def tasksDataAPI(request):
+    data = Task.objects.all()
+    dataList = []
+
+    for i in data:
+        dataList.append({'task_name':i.task_name, 'task_type':i.task_type, 'task_status':i.task_status, 'task_description':i.task_description, 'estimated_time':i.estimated_time, 'actual_time':i.actual_time, 'id':i.task_id})
+
+        return JsonResponse(dataList, safe=False)
 
 class CaseCreate(LoginRequiredMixin, CreateView):
     model = Case
@@ -97,11 +113,34 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     fields = '__all__'
     success_url = '/tasks/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tasks"] = Task.objects.all()
+        context["form_title"] = "Create Task"
+        return context
     
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = '__all__'
+    success_url = '/tasks/'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = Task.objects.all() 
+        return context
+
+class TaskCloseView(LoginRequiredMixin, UpdateView):
+    def get(self, request, pk):
+        task = Task.objects.get(pk=pk)
+        task.task_status = 'C'
+        task.save()
+        return redirect("task-detail", pk=pk)
     
 
 class TaskDelete(LoginRequiredMixin, DeleteView):

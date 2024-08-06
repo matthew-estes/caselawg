@@ -309,6 +309,15 @@ form button.submit-button:hover {
   transform: scale(1.05);
 }
 
+.delete-button {
+  background-color: #e74c3c;
+}
+
+.delete-button:hover {
+  background-color: var(--red-dark);
+  transform: scale(1.05);
+}
+
 @media (max-width: 700px) {
   .action-buttons-container {
     flex-direction: column;

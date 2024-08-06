@@ -1,5 +1,7 @@
 {% load static %}
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,10 +51,10 @@
                            <td>{{ task.estimated_time }}</td>
                            <td>{{ task.actual_time }}</td>
                            <td>
-                                <a class='btn btn-primary me-1' href='{% url 'task-detail' task.pk %}'><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                                <a class='btn btn-warning me-1' href='{% url 'task-update' task.pk %}'><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a class='btn btn-success me-1' href='{% url 'task-close' task.pk %}'><i class="fa-regular fa-square-check"></i></a>
-                                <a type='button' class='btn btn-danger me-1' href='{% url 'task-delete' task.pk %}'><i class="fa-regular fa-trash-can"></i></a>
+                                <a class='btn btn-primary me-1' href="{% url 'task-detail' task.pk %}"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                <a class='btn btn-warning me-1' href="{% url 'task-update' task.pk %}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a class='btn btn-success me-1' href="{% url 'task-close' task.pk %}"><i class="fa-regular fa-square-check"></i></a>
+                                <a type='button' class='btn btn-danger me-1' href="{% url 'task-delete' task.pk %}"><i class="fa-regular fa-trash-can"></i></a>
                            </td>
                           </tr>
                           {% endfor %}
@@ -69,7 +71,6 @@
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('task-create').addEventListener('click', function() {
