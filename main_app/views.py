@@ -118,6 +118,13 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = '__all__'
+
+class TaskCloseView(LoginRequiredMixin, UpdateView):
+    def get(self, request, pk):
+        task = Task.objects.get(pk=pk)
+        task.task_status = 'C'
+        task.save()
+        return redirect("task-detail", pk=pk)
     
 
 class TaskDelete(LoginRequiredMixin, DeleteView):

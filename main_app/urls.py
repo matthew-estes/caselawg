@@ -16,7 +16,7 @@ urlpatterns = [
     path('tasks2/', views.task_index2, name='task-index2'), #test url
     path('tasks/<int:pk>/', views.task_detail, name='task-detail'),
     path('task/<int:pk>/update/', views.TaskUpdate.as_view(), name='task-update'),
-    path('task/<int:pk>/close/', views.TaskUpdate.as_view(), name='task-close'),
+    path('task/<int:pk>/close/', views.TaskCloseView.as_view(), name='task-close'),
     path('task/<int:pk>/delete/', views.TaskDelete.as_view(), name='task-delete'),
     path('tasksapi/', views.tasksDataAPI, name='tasks-api'),
 ]
