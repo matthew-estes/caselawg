@@ -113,11 +113,27 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     fields = '__all__'
     success_url = '/tasks/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tasks"] = Task.objects.all()
+        context["form_title"] = "Create Task"
+        return context
     
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = '__all__'
+    success_url = '/tasks/'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = Task.objects.all() 
+        return context
 
 class TaskCloseView(LoginRequiredMixin, UpdateView):
     def get(self, request, pk):

@@ -4,7 +4,11 @@ rel='stylesheet' href='{% static 'css/form.css' %}'/> {% endblock %}
 {% block content %}
 
 <div class="page-header">
+  {% if task %}
   <h1>Update {{ task.task_name }}</h1>
+  {% else %}
+  <h1>Add Task</h1>
+  {% endif %}
 </div>
 
 <form action="" method="post" class="add-task-form-container">
@@ -12,7 +16,11 @@ rel='stylesheet' href='{% static 'css/form.css' %}'/> {% endblock %}
   <table>
     {{ form.as_p }}
   </table>
+  {% if task %}
   <button type="submit" class="submit-button">SAVE UPDATE</button>
+  {% else %}
+  <button type="submit" class="submit-button">ADD TASK</button>
+  {% endif %}
 </form>
 
 {% endblock %}
