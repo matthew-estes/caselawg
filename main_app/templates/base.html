@@ -20,11 +20,7 @@
           <li class="main-nav-item"><a href='{% url 'task-create' %}' class="main-nav-link">ADD TASK</a></li>
           <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
           <li class="main-nav-item">
-            <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
-              {% csrf_token %}
-              <button type="submit" class="main-nav-link main-nav-button">LOG OUT</button>
-            </form>
-          </li>
+            
         {% else %}
           <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
           <li class="main-nav-item"><a href='{% url 'home' %}' class="main-nav-link">LOGIN</a></li>
@@ -48,6 +44,14 @@
         <div class="create-button-container">
           <a href="{% url 'case-create' %}" class="base-button create-button" aria-label="Create New Case">+</a>
         </div>
+        {% if user.is_authenticated %}
+        <div class="logout-button-container">
+          <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="base-button logout-button">LOG OUT</button>
+          </form>
+        </div>
+        {% endif %}
       </nav>
       <main class="content">
         {% block content %}{% endblock %}

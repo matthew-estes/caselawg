@@ -121,6 +121,8 @@ body {
   overflow-y: auto;
 }
 
+
+
 .case-details-wrapper {
   width: 90%;
   margin: 0;
@@ -210,6 +212,33 @@ li:hover .case-button {
   color: var(--white);
   transform: scale(1.1);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  padding: 15px 0;
+}
+
+.logout-button {
+  text-decoration: none;
+  color: var(--white);
+  background-color: var(--red);
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: var(--button-box-shadow);
+}
+
+.logout-button:hover {
+  background-color: var(--red-dark);
+  transform: scale(1.05);
 }
 
 .action-buttons-container {
