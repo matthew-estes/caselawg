@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Task Details{% endblock %}
+
+{% block content %}
+<div class="case-details-wrapper content">
+  <h2>{{ case.name }}</h2>
+  <div class="task-details">
+    <p><strong>Task:</strong> {{ task.task_name }}</p>
+    <p><strong>Type:</strong> {{ task.task_type }}</p>
+    <p><strong>Status:</strong> {{ task.task_status }}</p>
+    <p><strong>Description:</strong> {{ task.task_description }}</p>
+    <p><strong>Date Created:</strong> {{ task.date_created }}</p>
+    <p><strong>Date Completed:</strong> {{ task.date_closed }}</p>
+    <p><strong>Estimated Time:</strong> {{ task.estimated_time }}</p>
+    <p><strong>Actual Time:</strong> {{ task.actual_time }}</p>
+  </div>
+  <div class="action-buttons-container">
+    <a href="{% url 'task-update' task.pk %}" class="action-button update-button">UPDATE</a>
+    <a href="{% url 'task-close' task.pk %}" class="action-button close-button">CLOSE</a>
+    <a href="{% url 'task-delete' task.pk %}" class="action-button delete-button">DELETE</a>
+  </div>
+{% endblock %}
