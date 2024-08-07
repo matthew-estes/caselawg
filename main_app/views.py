@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views import View
 from .models import Case, Task
@@ -73,19 +74,21 @@ def tasksDataAPI(request):
 class CaseCreate(LoginRequiredMixin, CreateView):
     model = Case
     fields = "__all__"
-    success_url = "/cases/"
+    # success_url = "/cases/"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        return redirect(reverse('case-detail', kwargs={'pk': self.object.pk}))
+        
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["cases"] = Case.objects.all()
         context["form_title"] = "Create Case"
         return context
-
-
+        
+        
 class CaseUpdate(LoginRequiredMixin, UpdateView):
     model = Case
     fields = ["attorney", "description", "case_status", "case_stage"]
@@ -118,6 +121,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+        # return redirect(reverse('case-detail', kwargs={'pk': self..fk}))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
