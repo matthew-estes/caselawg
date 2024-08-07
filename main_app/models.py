@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+import datetime
 
 CASESTATUS = (
     ('A', 'Open-Active'),
@@ -41,8 +42,8 @@ class Case(models.Model):
     name = models.CharField(max_length=20)
     client = models.CharField(max_length=20)
     attorney = models.CharField(max_length=20)
-    date_opened = models.DateField()
-    date_closed = models.DateField()
+    date_opened = models.DateField(blank=True, null=True, default=datetime.date.today())
+    date_closed = models.DateField(blank=True, null=True)
     description = models.TextField(max_length=500)
     case_status = models.CharField(
         max_length=1,
@@ -82,10 +83,10 @@ class Task(models.Model):
         default=TASKSTATUS[0][0]
     )
     task_description = models.TextField(max_length=500)
-    date_created = models.DateField()
-    date_closed = models.DateField()
+    date_created = models.DateField(blank=True, null=True, default=datetime.date.today())
+    date_closed = models.DateField(blank=True, null=True)
     estimated_time = models.IntegerField()
-    actual_time = models.IntegerField()
+    actual_time = models.IntegerField(blank=True, null=True)
     task_id = models.ForeignKey
     
     case = models.ForeignKey(Case, on_delete=models.CASCADE)
