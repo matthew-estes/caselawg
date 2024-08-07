@@ -112,13 +112,12 @@ body {
   justify-content: flex-start;
   align-items: center;
   flex-grow: 1;
-  margin: 20px;
-  margin-left: 250px;
-  padding: 20px;
+  margin-top: 20px;
+  margin-left: 150px;
+  /* padding-left: 20px; */
+  padding-right: 10px;
   border-radius: var(--border-radius);
   background-color: var(--white);
-  max-height: auto;
-  overflow-y: auto;
 }
 .form-container {
   display: flex;
@@ -134,7 +133,9 @@ body {
 
 .case-details-wrapper {
   width: 90%;
-  margin: 0;
+  margin-left: -100px;
+  margin-right: -50px;
+  /* justify-content: flex-start; */
 }
 
 .case-details h2 {
@@ -270,21 +271,9 @@ form button.submit-button:hover {
   transform: scale(1.05);
 }
 
-.action-buttons-container {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
 .action-button {
   text-decoration: none;
-  color: var(--white);
-  padding: 10px 20px;
   text-align: center;
-  border-radius: var(--border-radius);
-  font-weight: 500;
-  width: 70px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -318,18 +307,25 @@ form button.submit-button:hover {
   transform: scale(1.05);
 }
 
-@media (max-width: 700px) {
-  .action-buttons-container {
-    flex-direction: column;
-    align-items: center;
-  }
+.table {
+  width: 100%;
+  padding-right: 200px;
+  table-layout: auto;
+}
 
-  .action-button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
+th,
+td {
+  text-align: left;
+}
 
-  .content {
-    max-height: 45vh;
-  }
+.task-buttons {
+  width: 250px;
+}
+
+div.col-12 {
+  margin-left: -10px;
+}
+
+div.row {
+  margin-right: -150px;
 }
