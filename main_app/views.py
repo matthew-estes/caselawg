@@ -129,7 +129,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = '__all__'
-    success_url = '/tasks/'
+    success_url = '/cases/'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -146,5 +146,5 @@ class TaskCloseView(LoginRequiredMixin, UpdateView):
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
-    success_url = '/task/'
+    success_url = '/cases/'
 
