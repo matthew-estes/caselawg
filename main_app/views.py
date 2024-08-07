@@ -151,12 +151,19 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
 class TaskCloseView(LoginRequiredMixin, UpdateView):
     def get(self, request, pk):
         task = Task.objects.get(pk=pk)
+        case = task.case
         task.task_status = 'C'
         task.save()
-        return redirect("task-detail", pk=pk)
+        return redirect("case-detail", pk=case.pk)
     
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
-    success_url = '/cases/'
+    # success_url = '/cases/'
+
+    def get(self, request, pk):
+        task = Task.objects.get(pk=pk)
+        case = task.case
+        task.delete()
+        return redirect("case-detail", pk=case.pk)
 
