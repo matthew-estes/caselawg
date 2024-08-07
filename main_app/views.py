@@ -112,8 +112,8 @@ class CaseDelete(LoginRequiredMixin, DeleteView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = '__all__'
-    success_url = '/tasks/'
+    fields = "__all__"
+    success_url = '/cases/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
