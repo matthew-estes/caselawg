@@ -15,6 +15,7 @@
 
   <body>
     <h1>{{ case.name }} Case 1 Tasks</h1>
+    {% csrf_token %} 
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
@@ -41,7 +42,7 @@
                         </thead>
                         <tbody>
                             {% for task in tasks %}
-                          <tr>
+                          <tr class="task-row"> 
                            <td>{{ task.task_name }}</td>
                            <td>{{ task.task_type }}</td>
                            <td>{{ task.task_status }}</td>
@@ -92,7 +93,7 @@
           </td>
       `;
         tableBody.appendChild(newRow);
-      });
+      }); //don't do event listener on the table, just on the buttons ; queryselectorall on task-row, iterate through rows and add event listener on each button
       document.querySelector('#tasks-table').addEventListener('click', function(event) {
         if (event.target.classList.contains('save-task')) {
           const row = event.target.closest('tr');
@@ -121,23 +122,22 @@
             },
             body: JSON.stringify(data)
           })
-          .then(response => response.json())
-          .then(result => {
-            if(result.success) {
+          .then(response => {
+            if(response.ok) { //make sure status is 200
               row.innerHTML= `
-              <td>${result.task_name}</td>
-              <td>${result.task_type}</td>
-              <td>${result.task_status}</td>
-              <td>${result.task_description}</td>
-              <td>${result.date_created}</td>
-              <td>${result.date_closed}</td>
-              <td>${result.estimated_time}</td>
-              <td>${result.actual_time}</td>
+              <td>${data.task_name}</td>
+              <td>${data.task_type}</td>
+              <td>${data.task_status}</td>
+              <td>${data.task_description}</td>
+              <td>${data.date_created}</td>
+              <td>${data.date_closed}</td>
+              <td>${data.estimated_time}</td>
+              <td>${data.actual_time}</td>
               <td>
-                <a class='btn btn-secondary me-1' href='/tasks/${result.id}/detail'><i class='fa-solid fa-arrow-up-right-from-square'></i></a>
-                <a class='btn btn-warning me-1' href='/tasks/${result.id}/detail'><i class='fa-regular fa-pen-to-square'></i></a>
-                <a class='btn btn-success me-1' href='/tasks/${result.id}/detail'><i class='fa-regular fa-square-check'></i></a>
-                <a class='btn btn-danger me-1' href='/tasks/${result.id}/detail'><i class='fa-regular fa-trash-can'></i></a>
+                <a class='btn btn-secondary me-1' href='/tasks/1/detail'><i class='fa-solid fa-arrow-up-right-from-square'></i></a>
+                <a class='btn btn-warning me-1' href='/tasks/1/detail'><i class='fa-regular fa-pen-to-square'></i></a>
+                <a class='btn btn-success me-1' href='/tasks/1/detail'><i class='fa-regular fa-square-check'></i></a>
+                <a class='btn btn-danger me-1' href='/tasks/1/detail'><i class='fa-regular fa-trash-can'></i></a>
               </td>
               `;
             } else {
