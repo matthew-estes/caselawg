@@ -90,7 +90,7 @@ body {
   width: 100%;
   padding: 0;
   list-style: none;
-  margin-top: 25px;
+  margin-top: 30px;
 }
 
 .sidebar li {
@@ -244,12 +244,15 @@ form button.submit-button:hover {
   transform: scale(1.05);
 }
 
+
+
 .logout-button-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: auto;
-  padding: 15px 0;
+  padding: 30px 0;
 }
 
 .logout-button {
@@ -264,6 +267,10 @@ form button.submit-button:hover {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
   box-shadow: var(--button-box-shadow);
+}
+
+h1 {
+  color: white;
 }
 
 .logout-button:hover {
@@ -329,3 +336,4 @@ div.col-12 {
 div.row {
   margin-right: -150px;
 }
+

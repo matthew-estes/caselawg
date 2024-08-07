@@ -19,8 +19,6 @@
           <li class="main-nav-item"><a href='{% url 'case-create' %}' class="main-nav-link">ADD CASE</a></li>
           {% comment %} <li class="main-nav-item"><a href='{% url 'task-create' %}' class="main-nav-link">ADD TASK</a></li> {% endcomment %}
           <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
-          <li class="main-nav-item">
-            
         {% else %}
           <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
           <li class="main-nav-item"><a href='{% url 'home' %}' class="main-nav-link">LOGIN</a></li>
@@ -30,7 +28,6 @@
     </nav>
     <div class="container">
       <nav class="sidebar">
-
         <ul>
           {% for case in cases %}
           <li class="{% if case.case_status == 'A' %}status-active{% elif case.case_status == 'I' %}status-inactive{% elif case.case_status == 'C' %}status-closed{% endif %}">
@@ -45,7 +42,11 @@
           <a href="{% url 'case-create' %}" class="base-button create-button" aria-label="Create New Case">+</a>
         </div>
         {% if user.is_authenticated %}
+        <div class="user-name-container">
+       
+        </div>
         <div class="logout-button-container">
+          <h1>{{ user.username }}</h1>
           <form id="logout-form" method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="base-button logout-button">LOG OUT</button>
