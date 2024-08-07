@@ -46,7 +46,7 @@
        
         </div>
         <div class="logout-button-container">
-          <h1>{{ user.username }}</h1>
+          <h2>{{ user.username }}</h2>
           <form id="logout-form" method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="base-button logout-button">LOG OUT</button>

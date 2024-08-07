@@ -269,8 +269,9 @@ form button.submit-button:hover {
   box-shadow: var(--button-box-shadow);
 }
 
-h1 {
+h2{
   color: white;
+  text-transform: uppercase;
 }
 
 .logout-button:hover {

@@ -5,9 +5,9 @@ rel='stylesheet' href='{% static 'css/form.css' %}'/> {% endblock %}
 
 <div class="page-header">
   {% if task %}
-  <h1>Update {{ task.task_name }}</h1>
+  <h2>Update {{ task.task_name }}</h2>
   {% else %}
-  <h1>Add a Task to {{ case.name }} </h1>
+  <h2>Add a Task to {{ case.name }} </h2>
   {% endif %}
 </div>
 
