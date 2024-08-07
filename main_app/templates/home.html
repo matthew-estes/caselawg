@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% static 'css/home.css' %}" />
   <title>Document</title>
 </head>
@@ -24,15 +25,25 @@
       {% endif %}
     </ul>
   </nav>
-<h1>Welcome to CaseLawg</h1>
+<h1 class="container">Welcome to CaseLawg</h1>
 {% if not user.is_authenticated %}
 <section>
+  <div class="container">
     <form action="{% url 'home' %}" method="post" class="login">
       <h1>Login</h1>
-      {% csrf_token %} {{ form.as_p }}
+      {% csrf_token %} 
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" class="form-control" name="username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password">
+        </div>
       <input type="hidden" name="next" value="{{ next }}" />
-      <button type="submit" class="btn submit">Login</button>
+      <button type="submit" class="btn btn-primary submit">Login</button>
     </form>
+  </div>
   </section>
   {% endif %}
 

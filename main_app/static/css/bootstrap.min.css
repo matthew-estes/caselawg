@@ -2897,7 +2897,7 @@ fieldset:disabled .btn {
   opacity: var(--bs-btn-disabled-opacity);
 }
 .btn-primary {
-  --bs-btn-color: #fff;
+  --bs-btn-color: #0d14da;
   --bs-btn-bg: #1a1a1a;
   --bs-btn-border-color: #1a1a1a;
   --bs-btn-hover-color: #fff;
