@@ -22,6 +22,7 @@
     <p><strong>Case Status:</strong> {{ case.get_case_status_display }}</p>
   </div>
   <div class="action-buttons-container mb-4">
+    <a href="{% url 'task-create' %}" class="action-button update-button btn btn-success">ADD TASK</a>
     <a href="{% url 'case-update' case.pk %}" class="action-button update-button btn btn-success">UPDATE</a>
     <a href="{% url 'case-close' case.pk %}" class="action-button close-button btn btn-danger">CLOSE</a>
   </div>
