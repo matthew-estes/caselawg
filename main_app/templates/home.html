@@ -42,7 +42,9 @@
         </div>
       <input type="hidden" name="next" value="{{ next }}" />
       <button type="submit" class="btn btn-primary submit">Login</button>
+      <br/><br/>
     </form>
+    Don't have an account? Create an account <a href="{% url 'signup' %}">here.</a>
   </div>
   </section>
   {% endif %}
