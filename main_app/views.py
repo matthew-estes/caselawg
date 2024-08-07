@@ -115,9 +115,17 @@ class CaseDelete(LoginRequiredMixin, DeleteView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
+    # fields = ["task_name", "task_type", "task_status", "task_description", "date_created", "date_closed", "estimated_time", "actual_time"]
     fields = "__all__"
-    # success_url = '/cases/'
 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tasks"] = Task.objects.all()
+        context["form_title"] = "Create Task"
+        context['case'] = Case.objects.get(pk=self.kwargs['pk'])
+        return context
+    
     def form_valid(self, form):
         form.instance.user = self.request.user
         response = super().form_valid(form)
@@ -125,11 +133,6 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         case = task.case
         return redirect(reverse('case-detail', kwargs={'pk': case.pk}))
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["tasks"] = Task.objects.all()
-        context["form_title"] = "Create Task"
-        return context
     
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):

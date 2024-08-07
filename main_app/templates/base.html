@@ -17,7 +17,7 @@
         {% if user.is_authenticated %}
           <li class="main-nav-item"><a href='{% url 'case-index' %}' class="main-nav-link">MY CASES</a></li>
           <li class="main-nav-item"><a href='{% url 'case-create' %}' class="main-nav-link">ADD CASE</a></li>
-          <li class="main-nav-item"><a href='{% url 'task-create' %}' class="main-nav-link">ADD TASK</a></li>
+          {% comment %} <li class="main-nav-item"><a href='{% url 'task-create' %}' class="main-nav-link">ADD TASK</a></li> {% endcomment %}
           <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
           <li class="main-nav-item">
             

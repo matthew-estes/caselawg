@@ -7,13 +7,14 @@ rel='stylesheet' href='{% static 'css/form.css' %}'/> {% endblock %}
   {% if task %}
   <h1>Update {{ task.task_name }}</h1>
   {% else %}
-  <h1>Add Task</h1>
+  <h1>Add a Task to {{ case.name }} </h1>
   {% endif %}
 </div>
 
 <form action="" method="post" class="add-task-form-container">
   {% csrf_token %}
   <table>
+    <input type="hidden" name="case_id" value="{{ case.pk }}"/>
     {{ form.as_p }}
   </table>
   {% if task %}
