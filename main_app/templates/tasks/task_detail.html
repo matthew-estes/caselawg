@@ -1,23 +1,29 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Task Details{% endblock %}
 
 {% block content %}
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link href='{% static 'css/bootstrap.min.css' %}' rel='stylesheet'> 
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+{% endblock %}
 <div class="case-details-wrapper content">
   <h2>{{ case.name }}</h2>
   <div class="task-details">
     <p><strong>Task:</strong> {{ task.task_name }}</p>
-    <p><strong>Type:</strong> {{ task.task_type }}</p>
-    <p><strong>Status:</strong> {{ task.task_status }}</p>
+    <p><strong>Type:</strong> {{ task.get_task_type_display }}</p>
+    <p><strong>Status:</strong> {{ task.get_task_status_display }}</p>
     <p><strong>Description:</strong> {{ task.task_description }}</p>
     <p><strong>Date Created:</strong> {{ task.date_created }}</p>
     <p><strong>Date Completed:</strong> {{ task.date_closed }}</p>
     <p><strong>Estimated Time:</strong> {{ task.estimated_time }}</p>
     <p><strong>Actual Time:</strong> {{ task.actual_time }}</p>
   </div>
-  <div class="action-buttons-container">
-    <a href="{% url 'task-update' task.pk %}" class="action-button update-button">UPDATE</a>
-    <a href="{% url 'task-close' task.pk %}" class="action-button close-button">CLOSE</a>
-    <a href="{% url 'task-delete' task.pk %}" class="action-button delete-button">DELETE</a>
+  <div class="action-buttons-container mb-4">
+    <a href="{% url 'task-update' task.pk %}" class="action-button update-task-button btn btn-warning">UPDATE</a>
+    <a href="{% url 'task-close' task.pk %}" class="action-button close-task-button btn btn-success">CLOSE</a>
+    <a href="{% url 'task-delete' task.pk %}" class="action-button delete-task-button btn btn-danger">DELETE</a>
   </div>
 {% endblock %}
