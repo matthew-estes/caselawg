@@ -41,7 +41,8 @@ Quickly get started with CaseLawg by signing up for an account. Follow the app l
 
 Planned future enhancements and updates include:
 
-1. Add ability for users to create a profile page.
-2. Add a group chat feature.
-3. Add file sharing functionality.
-4. Add end-to-end encryption.
+1. Add ability for users to dyanmically edit task index table, including increment/decrement time.
+2. Add user permissions groups, including a partner group, to allow higher level management to access global view of cases, billable hours, invoices, across firm and to assign resources to cases.
+3. Build a dashboard view for users to see activity, billable hours, invoices, etc.
+4. Add ability to produce reports. 
+4. Add export/import, and file sharing functionality.
