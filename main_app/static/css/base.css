@@ -114,7 +114,6 @@ body {
   flex-grow: 1;
   margin-top: 20px;
   margin-left: 150px;
-  /* padding-left: 20px; */
   padding-right: 10px;
   border-radius: var(--border-radius);
   background-color: var(--white);
@@ -135,7 +134,6 @@ body {
   width: 90%;
   margin-left: -100px;
   margin-right: -50px;
-  /* justify-content: flex-start; */
 }
 
 .case-details h2 {
@@ -244,8 +242,6 @@ form button.submit-button:hover {
   transform: scale(1.05);
 }
 
-
-
 .logout-button-container {
   display: flex;
   flex-direction: column;
@@ -269,7 +265,7 @@ form button.submit-button:hover {
   box-shadow: var(--button-box-shadow);
 }
 
-.name-user{
+.name-user {
   color: white;
   text-transform: uppercase;
 }
@@ -352,4 +348,3 @@ div.row {
   background-color: var(--red-dark);
   transform: scale(1.05);
 }
-

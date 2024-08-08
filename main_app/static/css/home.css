@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap");
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+}
+
 .header-container-welcome {
   display: flex;
   justify-content: space-between;
@@ -26,7 +32,6 @@
 
 
 .main-nav {
-   
     z-index: 1;
   }
   
@@ -51,7 +56,6 @@
   }
   
   .main-nav-link:hover {
-   
     border-radius: var(--border-radius);
   }
   
@@ -61,19 +65,23 @@
     cursor: pointer;
   }
 
+
   .login-box {
-    background-color: rgba(216, 216, 216, 0.319);
-    opacity: 10;
-    padding: 10px;
+    background-color: rgba(239, 239, 239, 0.9);
+    padding: 20px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
   }
-
+  
   .create-account-box {
-    background-color: rgba(216, 216, 216, 0.319);
+    background-color: rgba(239, 239, 239, 0.9);
     opacity: 10;
     padding: 10px;
+    max-width: 600px;
+    border-radius: 10px;
+    width: 100%;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   }
-
-
 
