@@ -58,19 +58,22 @@ def case_detail(request, pk):
 @login_required
 def task_index(request):
     tasks = Task.objects.all()
-    return render(request, "tasks/task_index.html", {"tasks": tasks})
+    cases = Case.objects.filter(user=request.user)
+    return render(request, "tasks/task_index.html", {"tasks": tasks, "cases": cases})
 
 
 @login_required
 def task_index2(request):
     tasks = Task.objects.all()
-    return render(request, "tasks/task_index2.html", {"tasks": tasks})
+    cases = Case.objects.filter(user=request.user)
+    return render(request, "tasks/task_index2.html", {"tasks": tasks, "cases": cases})
 
 
 @login_required
 def task_detail(request, pk):
     task = Task.objects.get(pk=pk)
-    return render(request, "tasks/task_detail.html", {"task": task})
+    cases = Case.objects.filter(user=request.user)
+    return render(request, "tasks/task_detail.html", {"task": task, "cases": cases})
 
 
 def tasksDataAPI(request):
@@ -90,7 +93,7 @@ def tasksDataAPI(request):
             }
         )
 
-        return JsonResponse(dataList, safe=False)
+    return JsonResponse(dataList, safe=False)
 
 
 class CaseCreate(LoginRequiredMixin, CreateView):
@@ -107,20 +110,18 @@ class CaseCreate(LoginRequiredMixin, CreateView):
     ]
     success_url = "/cases/"
 
-
     def form_valid(self, form):
         form.instance.user = self.request.user
         response = super().form_valid(form)
         return redirect(reverse("case-detail", kwargs={"pk": self.object.pk}))
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["cases"] = Case.objects.all()
+        context["cases"] = Case.objects.filter(user=self.request.user)
         context["form_title"] = "Create Case"
         return context
-        
-        
+
+
 class CaseUpdate(LoginRequiredMixin, UpdateView):
     model = Case
     fields = ["attorney", "description", "case_status", "case_stage"]
@@ -130,7 +131,7 @@ class CaseUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["cases"] = Case.objects.all()
+        context["cases"] = Case.objects.filter(user=self.request.user)
         return context
 
 
@@ -146,6 +147,11 @@ class CaseDelete(LoginRequiredMixin, DeleteView):
     model = Case
     success_url = "/cases/"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cases"] = Case.objects.filter(user=self.request.user)
+        return context
+
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
@@ -155,38 +161,33 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["tasks"] = Task.objects.all()
         context["form_title"] = "Create Task"
-        context['case'] = Case.objects.get(pk=self.kwargs['pk'])
+        context["case"] = Case.objects.get(pk=self.kwargs["pk"])
+        context["cases"] = Case.objects.filter(user=self.request.user)
         return context
 
-    
     def form_valid(self, form):
         form.instance.user = self.request.user
         response = super().form_valid(form)
         task = self.object
         case = task.case
-        return redirect(reverse('case-detail', kwargs={'pk': case.pk}))
+        return redirect(reverse("case-detail", kwargs={"pk": case.pk}))
 
-    
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = '__all__'
+    fields = "__all__"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         response = super().form_valid(form)
         task = self.object
         case = task.case
-        return redirect(reverse('case-detail', kwargs={'pk': case.pk}))
-    
-
-
-
-
+        return redirect(reverse("case-detail", kwargs={"pk": case.pk}))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["tasks"] = Task.objects.all()
+        context["cases"] = Case.objects.filter(user=self.request.user)
         return context
 
 
@@ -194,14 +195,18 @@ class TaskCloseView(LoginRequiredMixin, UpdateView):
     def get(self, request, pk):
         task = Task.objects.get(pk=pk)
         case = task.case
-        task.task_status = 'C'
+        task.task_status = "C"
         task.save()
         return redirect("case-detail", pk=case.pk)
-    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cases"] = Case.objects.filter(user=self.request.user)
+        return context
+
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
- 
 
     def get(self, request, pk):
         task = Task.objects.get(pk=pk)
@@ -209,5 +214,7 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
         task.delete()
         return redirect("case-detail", pk=case.pk)
 
-
-     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cases"] = Case.objects.filter(user=self.request.user)
+        return context
