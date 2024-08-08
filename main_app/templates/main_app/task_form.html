@@ -1,5 +1,14 @@
-{% extends 'base.html' %} {% load static %} {% block head %} <link
-rel='stylesheet' href='{% static 'css/form.css' %}'/> {% endblock %} 
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %} 
+{% comment %} <link
+rel='stylesheet' href='{% static 'css/form.css' %}'/>  {% endcomment %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link href='{% static 'css/bootstrap.min.css' %}' rel='stylesheet'> 
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+{% endblock %}
+
 
 {% block content %}
 
@@ -18,9 +27,9 @@ rel='stylesheet' href='{% static 'css/form.css' %}'/> {% endblock %}
     {{ form.as_p }}
   </table>
   {% if task %}
-  <button type="submit" class="submit-button">SAVE UPDATE</button>
+  <button type="submit" class="btn btn-info">SAVE UPDATE</button>
   {% else %}
-  <button type="submit" class="submit-button">ADD TASK</button>
+  <button type="submit" class="btn btn-info">ADD TASK</button>
   {% endif %}
 </form>
 

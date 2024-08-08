@@ -154,27 +154,6 @@ class CaseDelete(LoginRequiredMixin, DeleteView):
         context["cases"] = Case.objects.filter(user=self.request.user)
         return context
 
-
-# class TaskCreate(LoginRequiredMixin, CreateView):
-#     model = Task
-#     fields = ['name', 'task_type', 'task_status', 'description', 'date_created', 'date_closed', 'estimated_time', 'actual_time']  # Exclude the 'case' field
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["tasks"] = Task.objects.all()
-#         context["form_title"] = "Create Task"
-#         context["case"] = Case.objects.get(pk=self.kwargs["pk"])
-#         context["cases"] = Case.objects.filter(user=self.request.user)
-#         return context
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         form.instance.case = Case.objects.get(pk=self.kwargs["pk"]) 
-#         return super().form_valid(form)
-
-#     def get_success_url(self):
-#         return reverse('case-detail', kwargs={'pk': self.kwargs["pk"]})
-
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     fields = ['task_name', 'task_type', 'task_status', 'task_description', 'date_created', 'estimated_time', 'actual_time']  
@@ -231,6 +210,7 @@ class TaskCloseView(LoginRequiredMixin, UpdateView):
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
+    success_url = '/cases'
 
     def get(self, request, pk):
         task = Task.objects.get(pk=pk)

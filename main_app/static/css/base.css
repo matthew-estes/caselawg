@@ -288,17 +288,9 @@ form button.submit-button:hover {
   box-shadow: var(--button-box-shadow);
 }
 
-.update-button {
-  background-color: #27ae60;
-}
-
 .update-button:hover {
-  background-color: var(--green-dark);
+  background-color: var(--blue-dark);
   transform: scale(1.05);
-}
-
-.close-button {
-  background-color: #e74c3c;
 }
 
 .close-button:hover {
@@ -336,5 +328,28 @@ div.col-12 {
 
 div.row {
   margin-right: -150px;
+}
+
+.update-task-button {
+  background-color: #1652c1;
+}
+
+.update-task-button:hover {
+  background-color: var(--green-dark);
+  transform: scale(1.05);
+}
+
+.close-task-button:hover {
+  background-color: var(--red-dark);
+  transform: scale(1.05);
+}
+
+.delete-task-button {
+  background-color: #e74c3c;
+}
+
+.delete-task-button:hover {
+  background-color: var(--red-dark);
+  transform: scale(1.05);
 }
 
