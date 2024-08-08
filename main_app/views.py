@@ -177,7 +177,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = "__all__"
+    fields = ['task_name', 'task_type', 'task_status', 'task_description', 'date_created', 'date_closed', 'estimated_time', 'actual_time'] 
 
     def form_valid(self, form):
         form.instance.user = self.request.user

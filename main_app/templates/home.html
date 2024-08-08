@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% static 'css/home.css' %}" />
-  <title>Document</title>
+  <title>CaseLawg</title>
 </head>
 <body>
   <nav class="main-nav">
@@ -14,29 +14,27 @@
       {% if user.is_authenticated %}
         <li class="main-nav-item"><a href='{% url 'case-index' %}' class="main-nav-link">MY CASES</a></li>
         <li class="main-nav-item"><a href='{% url 'case-create' %}' class="main-nav-link">ADD CASE</a></li>
-        <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
         <li class="main-nav-item">
           
       {% else %}
-        <li class="main-nav-item"><a href='{% url 'about' %}' class="main-nav-link">ABOUT</a></li>
+      
         <li class="main-nav-item"><a href='{% url 'home' %}' class="main-nav-link">LOGIN</a></li>
         <li class="main-nav-item"><a href='{% url 'signup' %}' class="main-nav-link">CREATE ACCOUNT</a></li>
       {% endif %}
     </ul>
   </nav>
-<div class="header-container-welcome">
-<h1 class="container header-title">Welcome to CaseLawg</h1>
-</div>
-<section class="logo-container">
-  <img src="{% static 'images/alarm_12109076.png' %}" alt="Icon by Anggara"/>
-</section>
-{% if not user.is_authenticated %}
-<br/>
-<section>
-  <div class="container login-box">
-    <form action="{% url 'home' %}" method="post" class="login">
-      <h2>Login</h2>
-      {% csrf_token %} 
+  <div class="header-container-welcome">
+    <h1 class="container header-title">Welcome to CaseLawg</h1>
+  </div>
+  <section class="logo-container">
+    <img src="{% static 'images/alarm_12109076.png' %}" alt="Icon by Anggara"/>
+  </section>
+  {% if not user.is_authenticated %}
+  <section class="login-section">
+    <div class="container login-box">
+      <form action="{% url 'home' %}" method="post" class="login">
+        <h2>Login</h2>
+        {% csrf_token %} 
         <div class="form-group">
           <label>Username</label>
           <input type="text" class="form-control" name="username">
@@ -45,15 +43,12 @@
           <label>Password</label>
           <input type="password" class="form-control" name="password">
         </div>
-      <input type="hidden" name="next" value="{{ next }}" />
-      <br/>
-      <button type="submit" class="btn btn-primary submit">Login</button>
-      <br/><br/>
-    </form>
-    Don't have an account? Create an account <a href="{% url 'signup' %}">here.</a>
-  </div>
+        <input type="hidden" name="next" value="{{ next }}" />
+        <button type="submit" class="btn btn-primary btn-block submit">Login</button>
+      </form>
+      <div class="text-center mt-3">
+        Don't have an account? Create an account <a href="{% url 'signup' %}">here.</a>
+      </div>
+    </div>
   </section>
   {% endif %}
-
-</body>
-</html>
