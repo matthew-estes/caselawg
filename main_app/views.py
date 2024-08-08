@@ -231,6 +231,7 @@ class TaskCloseView(LoginRequiredMixin, UpdateView):
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
+    success_url = '/cases'
 
     def get(self, request, pk):
         task = Task.objects.get(pk=pk)
