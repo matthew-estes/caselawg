@@ -17,6 +17,7 @@ CaseLawg is the modern attorney's best friend. CaseLawg understands how overwhel
 
 - Django
 - Python
+- PostgreSQL
 - Javascript
 - Bootstrap
 - HTML
