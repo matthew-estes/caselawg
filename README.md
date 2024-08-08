@@ -33,7 +33,7 @@ CaseLawg is the modern attorney's best friend. CaseLawg understands how overwhel
 Quickly get started with CaseLawg by signing up for an account. Follow the app link below to started.
 
 
-- [Heroku App link]()
+- [Heroku App link](https://caselawg-48d6671b624c.herokuapp.com/)
 - [Github repo](https://github.com/matthew-estes/caselawg)
 - [Planning materials](https://trello.com/b/oKaiq4Uq/caselawg-django-crud-app-project)
 
