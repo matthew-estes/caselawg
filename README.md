@@ -1,6 +1,6 @@
 # CaseLawg
 
-![CaseLawg welcome and logo](https://imgur.com/p6uQVlQ)
+![CaseLawg welcome and logo](https://img.freepik.com/free-photo/business-people-discussing-cafe_53876-15158.jpg?ga=GA1.1.1762832458.1718670539&semt=ais_hybrid)
 
 ---
 
