@@ -269,7 +269,7 @@ form button.submit-button:hover {
   box-shadow: var(--button-box-shadow);
 }
 
-h2{
+.name-user{
   color: white;
   text-transform: uppercase;
 }
