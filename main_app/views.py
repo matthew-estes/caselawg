@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Home(LoginView):
@@ -124,7 +125,7 @@ class CaseCreate(LoginRequiredMixin, CreateView):
 
 class CaseUpdate(LoginRequiredMixin, UpdateView):
     model = Case
-    fields = ["attorney", "description", "case_status", "case_stage"]
+    fields = ["client", "description", "case_status", "case_stage"]
 
     def get_success_url(self):
         return reverse("case-detail", kwargs={"pk": self.object.pk})
@@ -139,6 +140,7 @@ class CaseCloseView(View):
     def get(self, request, pk):
         case = Case.objects.get(pk=pk)
         case.case_status = "C"
+        case.date_closed = timezone.now() 
         case.save()
         return redirect("case-detail", pk=pk)
 
@@ -153,9 +155,29 @@ class CaseDelete(LoginRequiredMixin, DeleteView):
         return context
 
 
+# class TaskCreate(LoginRequiredMixin, CreateView):
+#     model = Task
+#     fields = ['name', 'task_type', 'task_status', 'description', 'date_created', 'date_closed', 'estimated_time', 'actual_time']  # Exclude the 'case' field
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["tasks"] = Task.objects.all()
+#         context["form_title"] = "Create Task"
+#         context["case"] = Case.objects.get(pk=self.kwargs["pk"])
+#         context["cases"] = Case.objects.filter(user=self.request.user)
+#         return context
+
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         form.instance.case = Case.objects.get(pk=self.kwargs["pk"]) 
+#         return super().form_valid(form)
+
+#     def get_success_url(self):
+#         return reverse('case-detail', kwargs={'pk': self.kwargs["pk"]})
+
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = "__all__"
+    fields = ['task_name', 'task_type', 'task_status', 'task_description', 'date_created', 'estimated_time', 'actual_time']  
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -167,10 +189,11 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        response = super().form_valid(form)
-        task = self.object
-        case = task.case
-        return redirect(reverse("case-detail", kwargs={"pk": case.pk}))
+        form.instance.case = Case.objects.get(pk=self.kwargs["pk"]) 
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('case-detail', kwargs={'pk': self.kwargs["pk"]})
 
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
@@ -196,6 +219,7 @@ class TaskCloseView(LoginRequiredMixin, UpdateView):
         task = Task.objects.get(pk=pk)
         case = task.case
         task.task_status = "C"
+        task.date_closed = timezone.now() 
         task.save()
         return redirect("case-detail", pk=case.pk)
 
