@@ -2900,8 +2900,8 @@ fieldset:disabled .btn {
   --bs-btn-color: #fff;
   --bs-btn-bg: #1a1a1a;
   --bs-btn-border-color: #1a1a1a;
-  --bs-btn-hover-color: #161616;
-  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-color: #fff ;
+  --bs-btn-hover-bg: #161616;
   --bs-btn-hover-border-color: #151515;
   --bs-btn-focus-shadow-rgb: 60, 60, 60;
   --bs-btn-active-color: #fff;
