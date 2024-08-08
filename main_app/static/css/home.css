@@ -1,3 +1,29 @@
+.header-container-welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.header-title {
+  margin: 0;
+  text-align: right;
+  flex: 1;
+}
+
+.logo-container {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    padding: 20px; /
+  }
+  
+.logo-container img {
+    max-width: 100%;
+    height: auto;
+    width: 150px; 
+  }
+
 
 .main-nav {
    
@@ -48,3 +74,6 @@
     padding: 10px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   }
+
+
+
