@@ -288,12 +288,8 @@ form button.submit-button:hover {
   box-shadow: var(--button-box-shadow);
 }
 
-.update-button {
-  background-color: #1652c1;
-}
-
 .update-button:hover {
-  background-color: var(--green-dark);
+  background-color: var(--blue-dark);
   transform: scale(1.05);
 }
 

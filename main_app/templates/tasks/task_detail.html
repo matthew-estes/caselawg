@@ -22,8 +22,8 @@
     <p><strong>Actual Time:</strong> {{ task.actual_time }}</p>
   </div>
   <div class="action-buttons-container mb-4">
-    <a href="{% url 'task-update' task.pk %}" class="action-button update-task-button btn btn-warning">UPDATE</a>
-    <a href="{% url 'task-close' task.pk %}" class="action-button close-task-button btn btn-success">CLOSE</a>
-    <a href="{% url 'task-delete' task.pk %}" class="action-button delete-task-button btn btn-danger">DELETE</a>
+    <a href="{% url 'task-update' task.pk %}" class="action-button btn btn-info">UPDATE</a>
+    <a href="{% url 'task-close' task.pk %}" class="action-button btn btn-success">CLOSE</a>
+    <a href="{% url 'task-delete' task.pk %}" class="action-button btn btn-danger">DELETE</a>
   </div>
 {% endblock %}
